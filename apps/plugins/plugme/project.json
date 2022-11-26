@@ -1,0 +1,102 @@
+{
+  "name": "plugins-plugme",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/plugins/plugme/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/plugins/plugme",
+        "index": "apps/plugins/plugme/src/index.html",
+        "baseHref": "/",
+        "main": "apps/plugins/plugme/src/main.ts",
+        "polyfills": "apps/plugins/plugme/src/polyfills.ts",
+        "tsConfig": "apps/plugins/plugme/tsconfig.app.json",
+        "assets": [
+          "apps/plugins/plugme/src/favicon.ico",
+          "apps/plugins/plugme/src/assets"
+        ],
+        "styles": [],
+        "scripts": [],
+        "webpackConfig": "apps/plugins/plugme/webpack.config.js"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/plugins/plugme/src/environments/environment.ts",
+              "with": "apps/plugins/plugme/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "webpackConfig": "apps/plugins/plugme/webpack.config.prod.js"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/react:module-federation-dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "plugins-plugme:build",
+        "hmr": true,
+        "port": 4201
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "plugins-plugme:build:development"
+        },
+        "production": {
+          "buildTarget": "plugins-plugme:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/plugins/plugme/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/plugins/plugme/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "serve-static": {
+      "executor": "@nrwl/web:file-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "plugins-plugme:build",
+        "port": 4201
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "plugins-plugme:build:development"
+        },
+        "production": {
+          "buildTarget": "plugins-plugme:build:production"
+        }
+      }
+    }
+  },
+  "tags": []
+}
