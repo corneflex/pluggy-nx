@@ -25,7 +25,6 @@ const prodConfig = {
    *   ['app2', '//example.com/path/to/app2/remoteEntry.js'],
    * ]
    */
-  remotes: [['plugins-plugme', '//localhost:4201/']],
 };
 
 module.exports = withModuleFederation(prodConfig);

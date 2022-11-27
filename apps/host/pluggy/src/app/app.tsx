@@ -1,8 +1,12 @@
 import * as React from 'react';
 import NxWelcome from './nx-welcome';
 import { Link, Route, Routes } from 'react-router-dom';
+import {useFederatedComponent} from "@corneflex/pluggy-core";
 
-const PluginsPlugme = React.lazy(() => import('plugins-plugme/Module'));
+export const DynamicComponent = ({url,scope,module}: { url:string, scope: string, module:string }) => {
+  const {Component: DynComponent} = useFederatedComponent(url, scope, module);
+  return DynComponent && <DynComponent/>;
+};
 
 export function App() {
   return (
@@ -19,7 +23,7 @@ export function App() {
       <Routes>
         <Route path="/" element={<NxWelcome title="host-pluggy" />} />
 
-        <Route path="/plugins-plugme" element={<PluginsPlugme />} />
+        <Route path="/plugins-plugme" element={ DynamicComponent && <DynamicComponent url="http://localhost:4201/remoteEntry.js" scope="plugme" module="./Module" />} />
       </Routes>
     </React.Suspense>
   );
