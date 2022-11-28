@@ -3,7 +3,7 @@ import { Express } from 'express';
 import { Multer } from 'multer';
 import {join, basename} from "path";
 import { readdir, stat, existsSync } from 'fs-extra';
-import {execute} from "@corneflex/pluggy-core";
+import {execute} from "@pluggy/core";
 import {mkdirSync} from "fs";
 
 @Injectable()

@@ -96,6 +96,12 @@
           "buildTarget": "plugins-plugme:build:production"
         }
       }
+    },
+    "publish": {
+      "executor": "@pluggy/plugin:publish"
+    },
+    "pack":{
+      "executor": "@pluggy/plugin:pack"
     }
   },
   "tags": []

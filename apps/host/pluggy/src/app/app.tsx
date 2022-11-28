@@ -1,7 +1,7 @@
 import * as React from 'react';
 import NxWelcome from './nx-welcome';
 import { Link, Route, Routes } from 'react-router-dom';
-import {useFederatedComponent} from "@corneflex/pluggy-core";
+import {useFederatedComponent} from "@pluggy/core";
 
 export const DynamicComponent = ({url,scope,module}: { url:string, scope: string, module:string }) => {
   const {Component: DynComponent} = useFederatedComponent(url, scope, module);
