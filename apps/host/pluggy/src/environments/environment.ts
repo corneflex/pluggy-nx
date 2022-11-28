@@ -3,4 +3,6 @@
 
 export const environment = {
   production: false,
+  baseUrl: 'http://localhost:4000',
+  pluggyLocatorUrl: 'http://localhost:3333',
 };
